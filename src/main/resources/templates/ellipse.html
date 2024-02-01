@@ -1,0 +1,34 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Ellipse Finder</title>
+</head>
+<body>
+    <h1>Ellipse Finder</h1>
+   
+    <form th:action="@{/findEllipses}" method="get">
+        <label for="radius">Enter Radius:</label>
+        <input type="number" id="radius" name="radius" required>
+        <button type="submit">Find Ellipses</button>
+    </form>
+   
+    <form th:action="@{/addMultipleEllipses}" method="post">
+        <button type="submit">Add Multiple Ellipses</button>
+    </form>
+   
+    <div th:if="${message}">
+        <p th:text="${message}" style="color: green;"></p>
+    </div>
+   
+    <div th:if="${ellipses != null and not #lists.isEmpty(ellipses)}">
+        <h2>Ellipses with the specified radius:</h2>
+        <ul>
+            <li th:each="ellipse : ${ellipses}">
+                <p th:text="${'ID: ' + ellipse.id + ', Radius1: ' + ellipse.radius1 + ', Radius2: ' + ellipse.radius2}"></p>
+            </li>
+        </ul>
+    </div>
+</body>
+</html>
